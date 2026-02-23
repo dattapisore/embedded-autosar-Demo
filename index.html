@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ServiceNow Employee Onboarding Portal</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-logo">SN</span>
+        <div>
+          <p class="brand-name">ServiceNow</p>
+          <p class="brand-subtitle">Employee Onboarding Portal</p>
+        </div>
+      </div>
+      <button id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </header>
+
+    <main class="layout">
+      <aside class="panel">
+        <h2>Welcome, New Hire 👋</h2>
+        <p>
+          Track your onboarding journey, submit required details, and get set up for success.
+        </p>
+
+        <section>
+          <h3>Progress</h3>
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <p id="progressText">0% completed</p>
+        </section>
+
+        <section>
+          <h3>Starter Checklist</h3>
+          <ul id="taskList" class="checklist"></ul>
+        </section>
+      </aside>
+
+      <section class="panel form-panel">
+        <h2>Onboarding Request Form</h2>
+        <form id="onboardingForm">
+          <div class="grid">
+            <label>
+              First name
+              <input type="text" name="firstName" required />
+            </label>
+            <label>
+              Last name
+              <input type="text" name="lastName" required />
+            </label>
+            <label>
+              Work email
+              <input type="email" name="email" required />
+            </label>
+            <label>
+              Department
+              <select name="department" required>
+                <option value="">Select</option>
+                <option>Engineering</option>
+                <option>Finance</option>
+                <option>HR</option>
+                <option>Legal</option>
+                <option>Marketing</option>
+                <option>Operations</option>
+              </select>
+            </label>
+            <label>
+              Manager
+              <input type="text" name="manager" required />
+            </label>
+            <label>
+              Start date
+              <input type="date" name="startDate" required />
+            </label>
+          </div>
+
+          <label>
+            Equipment request
+            <textarea
+              name="equipment"
+              rows="4"
+              placeholder="Laptop model, accessories, security keys, etc."
+            ></textarea>
+          </label>
+
+          <label>
+            Additional notes
+            <textarea name="notes" rows="3"></textarea>
+          </label>
+
+          <button type="submit" class="btn-primary">Submit to ServiceNow</button>
+        </form>
+        <p id="submissionStatus" aria-live="polite"></p>
+      </section>
+
+      <aside class="panel">
+        <h2>ServiceNow Integration</h2>
+        <p>
+          This portal is set up to post onboarding requests to ServiceNow's Table API.
+        </p>
+        <pre>
+POST /api/now/table/sc_req_item
+Fields: requester, department,
+manager, start_date, equipment,
+notes
+        </pre>
+        <p class="muted">
+          Configure your instance URL and API credentials in <code>app.js</code>.
+        </p>
+
+        <h3>Quick Links</h3>
+        <ul class="links">
+          <li><a href="https://developer.servicenow.com/" target="_blank" rel="noreferrer">ServiceNow Developer</a></li>
+          <li><a href="https://docs.servicenow.com/" target="_blank" rel="noreferrer">API Documentation</a></li>
+          <li><a href="https://nowlearning.servicenow.com/" target="_blank" rel="noreferrer">Now Learning</a></li>
+        </ul>
+      </aside>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
